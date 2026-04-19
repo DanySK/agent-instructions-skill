@@ -10,9 +10,10 @@ Use this skill when the task is to create or revise instructions for agents. Tar
 ## Workflow
 
 1. Inspect the repository before writing instructions. Prefer rules that match the actual build, test, lint, and formatting tooling already present.
-2. Write instructions as explicit actions and constraints, not general advice. Favor short rules that an agent can execute without interpretation.
-3. Keep the instruction set minimal. Include only repository-specific expectations or rules that are easy for agents to violate without local guidance.
-4. If the repository has multiple toolchains, state how to choose between them instead of listing every possible command.
+2. If the task says to update something, interpret that as a complete upgrade workflow: update the version, verify the new version in the repository, adapt the codebase to the new version if necessary, and continue until verification succeeds.
+3. Write instructions as explicit actions and constraints, not general advice. Favor short rules that an agent can execute without interpretation.
+4. Keep the instruction set minimal. Include only repository-specific expectations or rules that are easy for agents to violate without local guidance.
+5. If the repository has multiple toolchains, state how to choose between them instead of listing every possible command.
 
 ## Required Build And Format Rules
 
@@ -20,6 +21,7 @@ Use this skill when the task is to create or revise instructions for agents. Tar
 - If `ktlint` is present, instruct agents to format Kotlin code with its Gradle format task, typically `./gradlew ktlintFormat`, before finishing work.
 - When both rules apply, formatting should happen before the final validation run.
 - Do not invent alternate validation or formatting commands when the repository already exposes these tools.
+- For dependency or tool upgrades, require agents to keep fixing integration issues until the repository validates successfully with the new version.
 
 ## Warning Suppressions
 
@@ -31,6 +33,7 @@ Use this skill when the task is to create or revise instructions for agents. Tar
 
 - Prefer imperative wording: `Run`, `Use`, `Avoid`, `Require`.
 - Make escalation rules concrete. State what agents must do when validation fails, formatting changes files, or a suppression seems necessary.
+- Define `update` precisely when relevant: it means version change, compatibility fixes, and successful verification, not just editing a version string.
 - If a rule is conditional, say exactly what to detect, for example "if `gradlew` exists" or "if the Gradle build defines a `ktlintFormat` task".
 - Avoid duplicating generic coding advice that agents already know unless the repository needs stricter behavior.
 
@@ -40,5 +43,6 @@ An agent-instruction update is complete when:
 
 - the instructions match the repository's actual tooling,
 - validation and formatting commands are explicit,
+- update semantics require compatibility work through a passing verification,
 - suppression policy is documented with the justification requirement,
 - and the resulting file is concise enough to be followed reliably.
