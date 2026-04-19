@@ -1,0 +1,4 @@
+version: 1
+display_name: Agent Instructions
+short_description: Create or update repository instructions for coding agents.
+default_prompt: Create or revise local agent-instruction files so they match the repository's tooling and workflow, including validation, formatting, and exception-handling rules.
