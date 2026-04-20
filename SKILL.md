@@ -50,6 +50,7 @@ Use this skill when the task is to create or revise instructions for agents. Tar
 - Make escalation rules concrete. State what agents must do when validation fails, formatting changes files, or a suppression seems necessary.
 - Define `update` precisely when relevant: it means version change, compatibility fixes, and successful verification, not just editing a version string.
 - If a rule is conditional, say exactly what to detect, for example "if `gradlew` exists" or "if the Gradle build defines a `ktlintFormat` task".
+- Never reference local, machine-specific file paths in the instructions. Use repository-relative paths, tool names, or generic locations instead of system-specific absolute paths.
 - Avoid duplicating generic coding advice that agents already know unless the repository needs stricter behavior.
 
 ## Done Criteria
