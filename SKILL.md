@@ -42,6 +42,7 @@ Use this skill when the task is to create or revise instructions for agents. Tar
 - If the user asks for conventional commits, document the exact header format as `type(scope): summary`.
 - Document breaking changes explicitly as `type(scope)!: summary` plus a `BREAKING CHANGE:` footer.
 - If the user references `semantic-release-preconfigured-conventional-commits`, document this release-relevant mapping: `feat` for minor releases; `fix`, `docs`, `perf`, and `revert` for patch releases; `chore(api-deps)` for minor dependency releases; `chore(core-deps)` for patch dependency releases; `test`, `ci`, `build`, `style`, `refactor`, and other `chore(...)` scopes for non-release maintenance work unless the repository says otherwise.
+- If the change concerns agent instructions, skill definitions, or agent-execution policy, use `chore(...)` or `ci(...)` instead of `docs(...)`.
 - Tell agents to avoid vague commit summaries and to keep the subject concise, imperative, and specific.
 
 ## Writing Guidance
